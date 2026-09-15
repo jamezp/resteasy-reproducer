@@ -1,0 +1,22 @@
+target
+.cache
+.quarkus
+
+# Intellij
+*.iml
+*.ipr
+*.iws
+.idea
+
+# Eclipse
+**/.settings
+**/.project
+**/.classpath
+**/.checkstyle
+**/.factorypath
+
+# VS Code
+**/.vscode/
+
+# macOS file
+.DS_Store

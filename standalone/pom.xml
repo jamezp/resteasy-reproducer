@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright The RESTEasy Authors
+  ~ SPDX-License-Identifier: Apache-2.0
+  -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dev.resteasy.reproducer</groupId>
+        <artifactId>resteasy-reproducer-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>resteasy-reproducer-standalone</artifactId>
+    <packaging>jar</packaging>
+
+    <name>RESTEasy Reproducer - Standalone</name>
+    <description>Plain RESTEasy module for reproducing issues via JUnit tests</description>
+
+    <properties>
+        <version.dev.resteasy.junit>1.0.0.Beta6</version.dev.resteasy.junit>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.resteasy.vertx</groupId>
+            <artifactId>resteasy-vertx-cdi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.resteasy.vertx</groupId>
+            <artifactId>resteasy-vertx-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.resteasy.junit.extension</groupId>
+            <artifactId>resteasy-junit-extension</artifactId>
+            <version>${version.dev.resteasy.junit}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.6.3</version>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Djava.util.logging.manager=org.jboss.logmanager.LogManager</argument>
+                        <argument>-Dlogging.configuration=${logging.configuration}</argument>
+                        <argument>-Dclient.log.dir=${project.build.outputDirectory}</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>dev.resteasy.reproducer.standalone.RestActivator</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
