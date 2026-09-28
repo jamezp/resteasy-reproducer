@@ -5,9 +5,8 @@ name: Build and Test RESTEasy Vert.x
 
 on:
   push:
-    branc
-    branches-ignore:
-      - 'dependabot/**'
+    branches:
+      - 'main'
   pull_request:
     branches:
       - '**'
