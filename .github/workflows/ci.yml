@@ -1,0 +1,65 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Build and Test RESTEasy Vert.x
+
+on:
+  push:
+    branc
+    branches-ignore:
+      - 'dependabot/**'
+  pull_request:
+    branches:
+      - '**'
+
+# Only run the latest job
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+env:
+  MVN_CMD: './mvnw -V -B -fae'
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Validate Formatting
+        run: |
+         ${{ env.MVN_CMD }} spotless:check
+  build:
+    needs: format-check
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up JDKs
+        uses: actions/setup-java@v6
+        with:
+          distribution: 'temurin'
+          cache: 'maven'
+          java-version: 25
+      - name: Build and Test on ${{ matrix.os }}
+        run: ${{ env.MVN_CMD }} clean install
+      - name: Upload test logs for failed run
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: failure-reports-${{ matrix.os }}
+          path: |
+            **/surefire-reports/**
+            **/failsafe-reports/**
+            **/*.log

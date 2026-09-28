@@ -25,6 +25,7 @@
 
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
+        <jdk.min.version>${maven.compiler.release}</jdk.min.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependency versions -->
@@ -108,7 +109,6 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
-                        <argLine>${test.jvm.options}</argLine>
                         <systemPropertyVariables>
                             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                             <logging.configuration>${logging.configuration}</logging.configuration>
