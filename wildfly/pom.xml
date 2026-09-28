@@ -21,7 +21,7 @@
     <description>WAR module for reproducing issues on WildFly</description>
 
     <properties>
-        <version.org.wildfly.testing>1.0.0.Alpha5-SNAPSHOT</version.org.wildfly.testing>
+        <version.org.wildfly.testing>1.0.0.Alpha5</version.org.wildfly.testing>
         <version.wildfly-maven-plugin>6.0.1.Final</version.wildfly-maven-plugin>
 
         <!-- Intentionally left empty to ensure we use the latest version of WildFly -->
@@ -83,6 +83,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <argLine>${test.jvm.options}</argLine>
                     <systemPropertyVariables>
                         <jboss.home>${jboss.home}</jboss.home>
                     </systemPropertyVariables>
