@@ -1,0 +1,22 @@
+= RESTEasy Reproducer
+
+This is a simple project to assist with writing issue reproducers or examples for RESTEasy. It currently includes
+examples for Quarkus, Standalone RESTEasy and WildFly.
+
+== Standalone
+
+The standalone reproducer can be run with the `exec-maven-plugin` or a `java` command.
+
+=== `exec-maven-plugin`
+
+[source,bash]
+----
+mvn clean package -DskipTests exec:exec
+----
+
+=== Standalone Command
+
+[source,bash]
+----
+java $JAVA_OPTS -cp "target/libs/*:target/resteasy-reproducer-standalone.jar" dev.resteasy.reproducer.standalone.RestActivator
+----

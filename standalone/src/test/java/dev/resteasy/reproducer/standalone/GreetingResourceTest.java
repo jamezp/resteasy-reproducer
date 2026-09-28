@@ -16,8 +16,7 @@ import dev.resteasy.junit.extension.annotations.RestBootstrap;
 import dev.resteasy.junit.extension.annotations.RestResource;
 
 /**
- * Reproduces issues against {@link GreetingResource} using the RESTEasy
- * in-memory mock dispatcher (no server required).
+ * @author <a href="mailto:jperkins@redhat.com">James R. Perkins</a>
  */
 @RestBootstrap(GreetingResource.class)
 class GreetingResourceTest {
