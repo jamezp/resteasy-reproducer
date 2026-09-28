@@ -18,6 +18,7 @@ import jakarta.ws.rs.core.Application;
 public class RestActivator extends Application {
 
     public static void main(final String... args) {
+        System.setProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager");
         SeBootstrap.start(RestActivator.class)
                 .toCompletableFuture().join();
     }
