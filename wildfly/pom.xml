@@ -22,7 +22,7 @@
 
     <properties>
         <version.org.wildfly.testing>1.0.0.Alpha5</version.org.wildfly.testing>
-        <version.wildfly-maven-plugin>6.0.1.Final</version.wildfly-maven-plugin>
+        <version.wildfly-maven-plugin>6.1.0.Final</version.wildfly-maven-plugin>
 
         <!-- Intentionally left empty to ensure we use the latest version of WildFly -->
         <version.org.wildfly/>
